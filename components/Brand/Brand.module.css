@@ -1,0 +1,43 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #151a2d;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.light {
+  color: white;
+}
+
+.mark {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  transform: rotate(-10deg);
+  background: linear-gradient(135deg, #564cff, #7d6ef0);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, .24);
+}
+
+.mark::before {
+  content: '';
+  width: 13px;
+  height: 17px;
+  border: 2px solid white;
+  border-radius: 4px 4px 8px 8px;
+  transform: rotate(10deg);
+}
+
+.mark span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: white;
+  top: 8px;
+}

@@ -1,0 +1,35 @@
+.glowOne {
+  position: absolute;
+  top: -180px;
+  left: -120px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: rgba(101, 88, 233, .15);
+  filter: blur(18px);
+}
+
+.glowTwo {
+  position: absolute;
+  right: -160px;
+  top: 80px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(125, 108, 240, .11);
+  filter: blur(10px);
+}
+
+.dashboard {
+  border: 1px solid #e6e8f0;
+  border-radius: 32px;
+  background: #f8f9fd;
+  box-shadow: 0 34px 100px rgba(58, 52, 126, .18);
+  transform: perspective(1400px) rotateY(-7deg) rotateX(2deg);
+}
+
+@media (max-width:1023px) {
+  .dashboard {
+    transform: none;
+  }
+}

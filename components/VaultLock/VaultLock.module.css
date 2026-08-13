@@ -1,0 +1,17 @@
+.wrap {
+  min-height: calc(100vh - 76px);
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: #f8f9fd;
+}
+
+.icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 15px;
+  background: #eff0ff;
+  color: #4f46e5;
+}

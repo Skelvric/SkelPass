@@ -1,0 +1,31 @@
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: #687089;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.navItem:hover {
+  background: #ffffff;
+  color: #4f3aa6;
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.06);
+}
+
+.loginLink {
+  align-items: center;
+  color: #687089;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 150ms ease;
+}
+
+.loginLink:hover {
+  color: #4f3aa6;
+}

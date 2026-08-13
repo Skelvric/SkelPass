@@ -1,148 +1,70 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 142 71% 35%;
-    --success-foreground: 0 0% 100%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --ring: 0 0% 9%;
-    --radius: 0.625rem;
-  }
-
-  .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 14%;
-    --accent-foreground: 0 0% 95%;
-    --destructive: 0 62% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 142 60% 45%;
-    --success-foreground: 0 0% 9%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 95%;
-    --ring: 0 0% 80%;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  * {
-    transition-property: color, background-color, border-color, box-shadow;
-    transition-duration: 150ms;
-    transition-timing-function: ease;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-::selection {
-  @apply bg-primary text-primary-foreground;
-}
-
-input::placeholder,
-textarea::placeholder {
-  @apply text-muted-foreground;
-}
-
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-a:focus-visible,
-[role='button']:focus-visible {
-  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+:root {
+  --sp-bg: #f8f9fd;
+  --sp-surface: #ffffff;
+  --sp-border: #e7eaf2;
+  --sp-text: #171b2e;
+  --sp-muted: #687089;
+  --sp-primary: #4f46e5;
+  --sp-primary-strong: #3f38c8;
+  --sp-primary-soft: #eef0ff;
+  --sp-violet: #7c6cf2;
+  --sp-success: #18966b;
+  --sp-danger: #d94c5f;
 }
 
 * {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--border)) transparent;
-}
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-*::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--border));
-  border-radius: 9999px;
+  box-sizing: border-box;
 }
 
-.avatar {
-  @apply w-16 h-16 rounded-full overflow-hidden bg-muted flex items-center justify-center border border-border;
+html {
+  scroll-behavior: smooth;
 }
 
-.avatar-xl {
-  @apply w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-muted flex items-center justify-center border border-border;
-}
-
-.font-mono-tight {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  letter-spacing: -0.01em;
-}
-
-@media (max-width: 767px) {
-  input,
-  textarea,
-  select {
-    font-size: 16px;
-  }
-}
-
-html,
 body {
-  overflow-x: hidden;
-  width: 100%;
+  margin: 0;
+  background: var(--sp-bg);
+  color: var(--sp-text);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #ddd8ff;
+  color: var(--sp-text);
+}
+
+.shell-grid {
+  background-image:
+    linear-gradient(rgba(79, 70, 229, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, .035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid rgba(79, 70, 229, .22);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
 }

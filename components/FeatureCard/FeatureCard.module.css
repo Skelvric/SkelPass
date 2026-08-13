@@ -1,0 +1,9 @@
+.icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef0ff, #f4f0ff);
+  color: #4f46e5;
+}
