@@ -1,218 +1,316 @@
-### SkelVault
+### 🔐 SkelPass
 
-A modern, secure password manager built with Next.js and MongoDB. SkelVault provides a full-featured solution for managing, storing, and organizing passwords with enterprise-grade security.
+A modern, privacy-focused password manager built for the web. Manage your passwords from a clean, secure vault with client-side encryption.
 
-### ✨ Features
+SkelPass is a modern password manager built with Next.js, TypeScript, Tailwind CSS and Supabase.
 
-#### Security
-- **AES-256-GCM Encryption** – Military-grade encryption for all stored credentials.
-- **Rate Limiting** – Protection against brute-force attacks.
-- **CSRF Protection** – Cross-site request forgery mitigation.
-- **Session Management** – Secure user session handling.
-- **Device Management** – Track and manage authorized devices.
+The project is focused specifically on password management. Vault data is encrypted in the browser before it is stored in Supabase.
 
-#### User Experience
-- **Modern UI** – Built with shadcn/ui-inspired components and Framer Motion animations.
-- **Full Mobile Support** – Responsive design optimized for all screen sizes.
-- **Intuitive Dashboard** – Easy-to-use interface for managing passwords and profiles.
-- **Profile Management** – Organize credentials by profile/workspace.
+#### ✨ Tech Stack
 
-#### Architecture
-- **Full-Stack** – Seamless integration between frontend and backend.
-- **TypeScript** – Type-safe development throughout the application.
-- **Next.js App Router** – Latest Next.js architecture patterns.
-- **MongoDB** – Scalable NoSQL database for credential storage.
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase Auth
+- Supabase PostgreSQL
+- Supabase Storage
+- Web Crypto API
+- Electron Windows desktop application
 
-### 🛠️ Tech Stack
+### 🚀 Features
 
-| Category | Technology |
-|----------|------------|
-| **Frontend** | React, Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion |
-| **Backend** | Next.js API Routes, Node.js |
-| **Database** | MongoDB |
-| **Authentication** | JWT, bcrypt |
-| **Security** | AES-256-GCM, CSRF protection, rate limiting |
-| **UI Components** | shadcn/ui patterns, custom components |
+#### 🔑 Authentication
 
-### 🚀 Getting Started
+- Email/password registration
+- Login/logout
+- Protected dashboard
+- Onboarding after registration
 
-#### Prerequisites
-- Node.js 16+ 
-- MongoDB instance (local or cloud)
-- npm or yarn
+#### 👋 Onboarding
 
-#### Installation
+Users configure:
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Skelvric/SkelVault.git
-   cd SkelVault
-   ```
+- First name
+- Last name
+- Username
+- Profile image
+- Vault master password
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+#### 🗄️ Password Vault
 
-3. **Configure environment variables**
-   ```bash
-   cp .env.example .env.local
-   ```
-   
-   Fill in your environment variables:
-   ```env
-   # Database
-   MONGODB_URI="Replace MongoDB Connection String!"
-   MONGODB_DB="Replace Database Name!"
-     
-   # Auth
-   # Generate With: OpenSSL Rand -base64 32
-   NEXT_AUTH_SECRET="Replace Long Random String!"
-     
-   # Examples:
-   # http://localhost:3000
-   # https://vault.skelvric.com
-   NEXT_AUTH_URL="http://localhost:3000"
-     
-   # Security
-   # Generate With: OpenSSL Rand -base64 32
-   ENCRYPTION_KEY="Replace Long Random Secret!"
-     
-   # Generate With: OpenSSL Rand -base64 16
-   ENCRYPTION_SALT="Replace Base64 Random Salt!"
-     
-   # Environment
-   # Development - Local Development
-   # Production  - Production Deployment
-   # Test        - Automated Testing
-   NODE_ENV="development"
-   ```
+- Create passwords
+- Edit passwords
+- Delete passwords
+- Search passwords
+- Copy username/password
+- Show/hide password
+- Secure password generator
+- Vault lock/unlock
 
-4. **Run the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+#### 🛡️ Security
 
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+Vault encryption is performed client-side using the Web Crypto API.
+
+The current encryption flow uses:
+
+- PBKDF2
+- SHA-256
+- AES-256-GCM
+- Random per-operation IVs
+- Random KDF salt
+
+Plaintext vault passwords are not stored in Supabase.
+
+The master password itself is never stored.
+
+#### 👤 Profile
+
+Users can manage:
+
+- Profile image
+- First name
+- Last name
+- Username
+- Bio
+- Location
+- Website
+- Phone number
+
+Users can also delete their account and view registered/login devices.
 
 ### 📁 Project Structure
 
+```text
+skelpass/
+├── app/
+│   ├── (marketing)/
+│   ├── api/
+│   ├── dashboard/
+│   ├── login/
+│   ├── onboarding/
+│   ├── profile/
+│   ├── register/
+│   └── ...
+├── components/
+│   ├── AuthForm/
+│   ├── DashboardShell/
+│   ├── Footer/
+│   ├── Header/
+│   ├── PasswordManager/
+│   ├── Sidebar/
+│   └── ...
+├── data/
+│   └── content.ts
+├── lib/
+│   ├── crypto/
+│   └── supabase/
+├── public/
+│   └── downloads/
+├── supabase/
+│   └── migrations/
+│       └── schema.sql
+├── types/
+├── .env.example
+├── next.config.ts
+├── package.json
+└── proxy.ts
 ```
-├── app/                    # Next.js App Router pages and layouts
-├── components/             # React components (UI, forms, etc.)
-├── lib/                    # Utility functions and helpers
-├── types/                  # TypeScript type definitions
-├── middleware.ts           # Next.js middleware (auth, CSRF, etc.)
-├── package.json            # Dependencies
-├── next.config.js          # Next.js configuration
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── tsconfig.json           # TypeScript configuration
+
+The project follows component-based architecture and colocated component files.
+
+Example:
+
+```text
+components/Example/
+├── Example.tsx
+└── Example.module.css
 ```
 
-### 🔐 Security Considerations
+Static UI text is kept in:
 
-SkelVault implements multiple layers of security:
+```text
+data/content.ts
+```
 
-- **Encryption in Transit** – All data transmitted over HTTPS.
-- **Encryption at Rest** – Passwords encrypted with AES-256-GCM before storage.
-- **Authentication** – JWT-based authentication with secure session management.
-- **Rate Limiting** – API endpoints protected against brute-force attacks.
-- **CSRF Protection** – Cross-site request forgery tokens on all state-changing operations.
-- **Device Tracking** – Monitor which devices have access to your account.
-- **Password Hashing** – User passwords hashed with bcrypt before storage.
+### 🗃️ Database
 
-### 🎨 UI/UX Highlights
+The main application tables are:
 
-- **Smooth Animations** – Framer Motion for polished interactions.
-- **Responsive Design** – Mobile-first approach with perfect tablet and desktop support.
-- **Accessibility** – Semantic HTML and ARIA labels for screen readers.
-- **Dark Mode Support** – Tailwind CSS theme configuration.
-- **Performance Optimized** – Lazy loading, code splitting, and image optimization.
+```text
+auth.users
+    │
+    ├── profiles
+    ├── vaultSettings
+    ├── passwords
+    └── loginDevices
+```
 
-### 🚢 Desktop Application
+#### vaultSettings
 
-SkelVault can be packaged as a thin Electron wrapper that loads the web application directly. This provides:
+Stores vault configuration and verification material.
 
-- **Cross-Platform** – Windows, macOS, and Linux support.
-- **Native Integration** – System notifications and shortcuts.
-- **Offline Caching** – Service Worker support for offline functionality.
+It does not store the user's master password.
 
-### 📝 Environment Variables
+#### passwords
 
-See `.env.example` for all available configuration options.
+Stores encrypted password records.
 
-### Essential Variables
- 
-- `MONGODB_URI` – MongoDB connection string.
-- `MONGODB_DB` – MongoDB database name.
-- `NEXT_AUTH_SECRET` – Secret key for NextAuth.js (generate with `openssl rand -base64 32`).
-- `NEXT_AUTH_URL` – Application URL for authentication callbacks.
-- `ENCRYPTION_KEY` – Base64-encoded AES-256 key for password encryption (generate with `openssl rand -base64 32`).
-- `ENCRYPTION_SALT` – Base64-encoded salt for encryption (generate with `openssl rand -base64 16`).
-- `NODE_ENV` – Environment mode (development, production, or test).
+Typical fields:
 
-### 🧪 Development
+```text
+id
+userId
+encryptedData
+encryptionIv
+encryptionVersion
+createdAt
+updatedAt
+```
 
-#### Running Tests
+#### profiles
+
+Stores user profile information.
+
+#### loginDevices
+
+Stores application-level device information for authenticated users.
+
+### ⚡ Supabase Setup
+
+Create a Supabase project and configure the environment variables.
+
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=Your_Publishable_Key
+
+SUPABASE_SERVICE_ROLE_KEY=Your-Service-Role-Key
+```
+
+`SUPABASE_SERVICE_ROLE_KEY` is server-only.
+
+Never expose it through:
+
+- `NEXT_PUBLIC_*`
+- Client Components
+- browser JavaScript
+- Git repositories
+
+Run the database schema from:
+
+```text
+supabase/migrations/schema.sql
+```
+
+The schema enables Row Level Security and grants authenticated users access only to their own records.
+
+### 🛠️ Installation
+
+Install dependencies:
+
 ```bash
-npm run test
+npm install
 ```
 
-#### Building for Production
+Start the development server:
+
 ```bash
+npm run dev
+```
+
+Open:
+
+```text
+http://localhost:3000
+```
+
+### 🚢 Production
+
+Before deployment:
+
+```bash
+npm ci
+npm run lint
+npm run typecheck
 npm run build
+```
+
+Then start the production server:
+
+```bash
 npm start
 ```
 
-#### Linting and Formatting
-```bash
-npm run lint
-npm run format
+Configure the production environment variables in the hosting provider.
+
+Do not commit `.env.local`.
+
+### 🗑️ Account Deletion
+
+Account deletion is handled server-side.
+
+The application uses the Supabase Admin API to delete the authenticated user.
+
+The service role key must only be available to the server-side account deletion route.
+
+Related data should be removed through the configured foreign-key cascade relationships.
+
+### 🔒 Security Notes
+
+SkelPass is designed so that the Supabase database does not need plaintext vault passwords.
+
+The general data flow is:
+
+```text
+Master Password
+      │
+      ▼
+PBKDF2 / SHA-256
+      │
+      ▼
+AES-256-GCM Key
+      │
+      ▼
+Browser-side encryption
+      │
+      ▼
+Supabase ciphertext
 ```
 
-### 📊 Performance Optimizations
+Supabase Row Level Security restricts records using the authenticated user's ID.
 
-- **Next.js Image Optimization** – Automatic image resizing and format conversion.
-- **Code Splitting** – Route-based code splitting with dynamic imports.
-- **Bundle Analysis** – Optimized JavaScript bundle size.
-- **Database Indexing** – Strategic MongoDB index placement.
-- **API Caching** – Strategic use of caching headers.
+For production, verify the complete authentication and vault lifecycle in the deployed environment.
 
-### 🤝 Contributing
+### 🎨 Code Style
 
-Contributions are welcome! Please follow these steps:
+The project uses:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/feature`).
-3. Commit your changes (`git commit -m 'Add feature'`).
-4. Push to the branch (`git push origin feature/feature`).
-5. Open a Pull Request.
+- TypeScript
+- camelCase property and database column naming
+- Semicolons
+- Colocated components
+- CSS Modules where component-specific styling is required
+- Tailwind CSS for utility styling
+- Server Components by default
+- Client Components only where browser interactivity is required
+
+Example:
+
+```ts
+const password = {
+  userId: user.id,
+  encryptedData,
+  encryptionIv,
+  encryptionVersion: 1,
+};
+```
 
 ### 📄 License
 
-This project is licensed under the MIT License – see the LICENSE file for details.
+SkelPass is released under the MIT License.
 
-### 🔗 Links
+Copyright © 2026 SkelPass.
 
-- **Live App:** [vault.skelvric.com](https://vault.skelvric.com).
-- **GitHub:** [github.com/Skelvric/SkelVault](https://github.com/Skelvric/SkelVault).
-- **Issues:** [Report a bug or request a feature](https://github.com/Skelvric/SkelVault/Issues).
-
-### ⚠️ Security Disclaimer
-
-While SkelVault implements strong security practices, it is provided as-is. For production use, conduct a security audit. Users are responsible for:
-
-- Using strong, unique master passwords.
-- Keeping their devices secure.
-- Regularly updating the application.
-- Enabling two-factor authentication where available.
-
-### 📞 Support
-
-For issues, questions, or suggestions, please open an issue on GitHub or visit the live application.
-
-Made with ❤️ by [Skelvric](https://skelvric.com).
+See the [`LICENSE.txt`](LICENSE.txt) file for the complete license text.
